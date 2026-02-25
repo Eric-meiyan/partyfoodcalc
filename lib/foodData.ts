@@ -35,7 +35,7 @@ export const foodItems: Record<string, FoodItem> = {
     servingSize: '6-10 wings (appetizer) / 12-16 wings (main)',
     perPersonAppetizer: 8,
     perPersonMain: 14,
-    perPersonKid: 6,
+    perPersonKid: 4,
     unit: 'pieces',
     category: 'protein',
   },

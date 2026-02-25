@@ -86,8 +86,16 @@ export default function Results({ results, totalGuests, onGenerateShoppingList }
           {renderGroup('Beverages', '🥤', drinks, 'blue')}
         </div>
 
+        {/* Trust Badge */}
+        <div className="mt-8 p-4 bg-white rounded-2xl border border-gray-200 flex items-start gap-3">
+          <span className="text-2xl flex-shrink-0">📏</span>
+          <div className="text-sm text-gray-500">
+            <strong className="text-gray-700">How we calculate:</strong> Our portions are based on industry-standard catering guidelines used by professional event planners. We adjust for party type, duration, and guest mix (adults eat more than kids). We recommend buying 10-15% extra for bigger appetites.
+          </div>
+        </div>
+
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 mt-8 pt-6 border-t border-gray-200">
+        <div className="flex flex-col sm:flex-row gap-3 mt-6 pt-6 border-t border-gray-200">
           {onGenerateShoppingList && (
             <button
               onClick={() => { trackGenerateShoppingList(results.length); onGenerateShoppingList?.(); }}
