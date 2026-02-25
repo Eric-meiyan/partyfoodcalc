@@ -54,15 +54,15 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Google Analytics - GA4 */}
-        {/* Replace G-XXXXXXXXXX with your actual GA4 Measurement ID */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+        {/* Replace G-SZRK2KY1GS with your actual GA4 Measurement ID */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SZRK2KY1GS"></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-XXXXXXXXXX');
+              gtag('config', 'G-SZRK2KY1GS');
             `,
           }}
         />
