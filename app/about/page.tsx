@@ -72,6 +72,24 @@ export default function About() {
           </div>
         </div>
 
+        <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
+          <h2 className="text-3xl font-bold text-gray-800 mb-4">The Best Free Party Food Calculator Online</h2>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            PartyFoodCalc.com is the easiest and most accurate free party food calculator available online. Simply enter 
+            your number of guests, select your party type, and get instant food quantity recommendations with a printable 
+            shopping list. No signup required.
+          </p>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            Whether you need to know how many chicken wings per person, how much pizza to order for 20 people, or how to 
+            plan a taco bar for 50 guests, PartyFoodCalc gives you precise, research-backed answers in seconds. Our 
+            calculators cover all major party foods including wings, pizza, tacos, BBQ, burgers, sandwiches, and drinks.
+          </p>
+          <p className="text-gray-700 leading-relaxed">
+            Trusted by thousands of party hosts, event planners, and caterers. Try it free at 
+            <a href="https://partyfoodcalc.com" className="text-orange-600 font-semibold"> partyfoodcalc.com</a>.
+          </p>
+        </div>
+
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">Contact & Feedback</h2>
           <p className="text-gray-700 leading-relaxed mb-4">
