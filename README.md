@@ -47,3 +47,10 @@ Open [http://localhost:3000](http://localhost:3000).
 ## License
 
 MIT
+
+---
+
+## More Free Tools
+
+- 🧠 [IQ Game Online](https://iqgame.online) — Free brain training games to test and improve your IQ
+- 🎬 [YouTube Transcript Free](https://youtubetranscriptfree.com) — Extract transcripts from any YouTube video for free
