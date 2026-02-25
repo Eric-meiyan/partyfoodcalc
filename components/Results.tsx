@@ -17,57 +17,93 @@ interface ResultsProps {
 export default function Results({ results, totalGuests, onGenerateShoppingList }: ResultsProps) {
   if (results.length === 0) return null;
 
-  return (
-    <div className="mt-8 animate-fadeIn">
-      <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl shadow-xl p-6 md:p-8 border-2 border-green-100">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-            📊 Your Party Food Plan
-          </h2>
-          <div className="text-right">
-            <p className="text-sm text-gray-600">Total Guests</p>
-            <p className="text-3xl font-bold text-orange-600">{totalGuests}</p>
-          </div>
-        </div>
+  const proteins = results.filter(r => ['Chicken Wings', 'Pizza', 'Burgers', 'Hot Dogs', 'Pulled Pork'].includes(r.name));
+  const sides = results.filter(r => ['Coleslaw', 'Potato Salad', 'Baked Beans'].includes(r.name));
+  const drinks = results.filter(r => ['Water', 'Soda', 'Beer'].includes(r.name));
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-          {results.map((item, index) => (
+  const renderGroup = (title: string, icon: string, items: ResultItem[], color: string) => {
+    if (items.length === 0) return null;
+    const colorMap: Record<string, string> = {
+      orange: 'from-orange-500 to-amber-500',
+      green: 'from-green-500 to-emerald-500',
+      blue: 'from-blue-500 to-cyan-500',
+    };
+    return (
+      <div>
+        <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r ${colorMap[color]} text-white text-sm font-bold mb-4`}>
+          <span>{icon}</span> {title}
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {items.map((item, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow border border-gray-100"
+              className="bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-all border border-gray-100 group hover:border-orange-200"
             >
-              <div className="flex items-start gap-3">
-                <div className="text-4xl">{item.emoji}</div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-gray-800 text-lg">{item.name}</h3>
-                  <p className="text-2xl font-bold text-orange-600 mt-1">
-                    {item.amount} {item.unit}
+              <div className="flex items-start gap-4">
+                <div className="text-4xl group-hover:scale-110 transition-transform">{item.emoji}</div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-gray-700 text-sm uppercase tracking-wide">{item.name}</h3>
+                  <p className="text-3xl font-extrabold text-gray-900 mt-1 leading-tight">
+                    {item.amount} <span className="text-lg font-bold text-gray-400">{item.unit}</span>
                   </p>
                   {item.details && (
-                    <p className="text-sm text-gray-600 mt-1">{item.details}</p>
+                    <p className="text-xs text-gray-500 mt-1.5 bg-gray-50 inline-block px-2 py-0.5 rounded-full">{item.details}</p>
                   )}
                 </div>
               </div>
             </div>
           ))}
         </div>
+      </div>
+    );
+  };
 
-        {onGenerateShoppingList && (
-          <div className="flex gap-4">
+  return (
+    <div className="mt-10 animate-slideUp">
+      <div className="bg-gradient-to-br from-gray-50 to-orange-50/30 rounded-3xl shadow-2xl p-6 md:p-8 border border-orange-100/50">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
+              Your Party Food Plan
+            </h2>
+            <p className="text-gray-500 mt-1">Here&apos;s what you need for <strong className="text-orange-600">{totalGuests} guests</strong></p>
+          </div>
+          <div className="flex items-center gap-3 bg-white rounded-2xl px-5 py-3 shadow-sm border border-gray-100">
+            <div className="text-center">
+              <p className="text-3xl font-extrabold text-orange-600">{totalGuests}</p>
+              <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">Guests</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Result Groups */}
+        <div className="space-y-8">
+          {renderGroup('Main Dishes', '🍖', proteins, 'orange')}
+          {renderGroup('Side Dishes', '🥗', sides, 'green')}
+          {renderGroup('Beverages', '🥤', drinks, 'blue')}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-3 mt-8 pt-6 border-t border-gray-200">
+          {onGenerateShoppingList && (
             <button
               onClick={onGenerateShoppingList}
-              className="flex-1 py-3 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition-colors shadow-md"
+              className="flex-1 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-2xl hover:from-green-600 hover:to-emerald-700 transition-all shadow-lg hover:shadow-xl active:scale-[0.98] flex items-center justify-center gap-2"
             >
-              📝 Generate Shopping List
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+              Generate Shopping List
             </button>
-            <button
-              onClick={() => window.print()}
-              className="px-6 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors shadow-md"
-            >
-              🖨️ Print
-            </button>
-          </div>
-        )}
+          )}
+          <button
+            onClick={() => window.print()}
+            className="px-8 py-4 bg-white text-gray-700 font-bold rounded-2xl hover:bg-gray-50 transition-all shadow-sm border-2 border-gray-200 hover:border-gray-300 flex items-center justify-center gap-2"
+          >
+            🖨️ Print
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -178,17 +178,33 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-green-50">
       {/* Hero Section */}
-      <header className="bg-gradient-to-r from-orange-500 to-orange-600 text-white py-12 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            🎉 Party Food Calculator
+      <header className="relative bg-gradient-to-br from-orange-500 via-orange-600 to-amber-600 text-white py-16 md:py-24 px-4 overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-10 -left-10 w-40 h-40 bg-white/10 rounded-full blur-2xl" />
+          <div className="absolute top-20 right-10 w-60 h-60 bg-amber-400/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-1/3 w-80 h-40 bg-orange-400/20 rounded-full blur-3xl" />
+          {/* Floating food emojis */}
+          <div className="absolute top-8 left-[10%] text-4xl opacity-20 animate-bounce" style={{animationDuration:'3s'}}>🍕</div>
+          <div className="absolute top-16 right-[15%] text-3xl opacity-20 animate-bounce" style={{animationDuration:'4s',animationDelay:'1s'}}>🍗</div>
+          <div className="absolute bottom-12 left-[20%] text-3xl opacity-20 animate-bounce" style={{animationDuration:'3.5s',animationDelay:'0.5s'}}>🌮</div>
+          <div className="absolute bottom-8 right-[25%] text-4xl opacity-20 animate-bounce" style={{animationDuration:'4.5s',animationDelay:'2s'}}>🍔</div>
+        </div>
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium mb-6">
+            ✨ Free — No signup required
+          </div>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-5 leading-tight tracking-tight">
+            Party Food<br />Calculator
           </h1>
-          <p className="text-xl md:text-2xl opacity-90">
-            Never run out of food (or waste money) again!
+          <p className="text-xl md:text-2xl opacity-90 font-medium max-w-2xl mx-auto">
+            Never run out of food or waste money again. Calculate exact portions for any party in seconds.
           </p>
-          <p className="text-lg opacity-80 mt-2">
-            Calculate exactly how much food you need for your party in seconds
-          </p>
+          <div className="flex items-center justify-center gap-6 mt-8 text-sm opacity-80">
+            <span className="flex items-center gap-1.5">✓ 10+ food types</span>
+            <span className="flex items-center gap-1.5">✓ Shopping list</span>
+            <span className="flex items-center gap-1.5">✓ 100% free</span>
+          </div>
         </div>
       </header>
 
@@ -281,16 +297,40 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8 px-4 mt-16">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="flex justify-center gap-8 mb-4">
-            <a href="/about" className="hover:text-orange-300 transition-colors">About</a>
-            <a href="/privacy" className="hover:text-orange-300 transition-colors">Privacy</a>
-            <a href="/terms" className="hover:text-orange-300 transition-colors">Terms</a>
+      <footer className="bg-gray-900 text-white py-12 px-4 mt-20">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <h3 className="font-extrabold text-lg mb-3">🎉 PartyFoodCalc</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                The easiest way to calculate how much food you need for any party. Free, fast, and accurate.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-bold text-sm uppercase tracking-wide text-gray-400 mb-3">Calculators</h3>
+              <div className="grid grid-cols-2 gap-2">
+                <a href="/pizza-calculator" className="text-gray-300 hover:text-orange-400 text-sm transition-colors">Pizza</a>
+                <a href="/chicken-wings-calculator" className="text-gray-300 hover:text-orange-400 text-sm transition-colors">Wings</a>
+                <a href="/taco-bar-calculator" className="text-gray-300 hover:text-orange-400 text-sm transition-colors">Taco Bar</a>
+                <a href="/bbq-calculator" className="text-gray-300 hover:text-orange-400 text-sm transition-colors">BBQ</a>
+                <a href="/burger-calculator" className="text-gray-300 hover:text-orange-400 text-sm transition-colors">Burgers</a>
+                <a href="/drinks-calculator" className="text-gray-300 hover:text-orange-400 text-sm transition-colors">Drinks</a>
+              </div>
+            </div>
+            <div>
+              <h3 className="font-bold text-sm uppercase tracking-wide text-gray-400 mb-3">Links</h3>
+              <div className="flex flex-col gap-2">
+                <a href="/about" className="text-gray-300 hover:text-orange-400 text-sm transition-colors">About Us</a>
+                <a href="/privacy" className="text-gray-300 hover:text-orange-400 text-sm transition-colors">Privacy Policy</a>
+                <a href="/terms" className="text-gray-300 hover:text-orange-400 text-sm transition-colors">Terms of Service</a>
+              </div>
+            </div>
           </div>
-          <p className="text-gray-400">
-            © 2025 PartyFoodCalc.com - Calculate the perfect party portions
-          </p>
+          <div className="border-t border-gray-800 pt-6 text-center">
+            <p className="text-gray-500 text-sm">
+              © {new Date().getFullYear()} PartyFoodCalc.com — Calculate the perfect party portions
+            </p>
+          </div>
         </div>
       </footer>
     </div>

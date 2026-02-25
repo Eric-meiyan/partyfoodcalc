@@ -4,33 +4,97 @@
 
 @layer utilities {
   .animate-fadeIn {
-    animation: fadeIn 0.5s ease-in;
+    animation: fadeIn 0.5s ease-out;
   }
   
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .animate-slideUp {
+    animation: slideUp 0.6s ease-out;
   }
+
+  .animate-scaleIn {
+    animation: scaleIn 0.4s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+}
+
+/* Custom range slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #fed7aa 0%, #fb923c 50%, #ea580c 100%);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #ea580c;
+  margin-top: -10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: transform 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+input[type="range"]::-moz-range-track {
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #fed7aa 0%, #fb923c 50%, #ea580c 100%);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #ea580c;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* Number input - hide arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 /* Print Styles */
 @media print {
-  header,
-  footer,
-  .no-print {
+  header, footer, .no-print, nav {
     display: none !important;
   }
-  
   body {
     background: white !important;
   }
-  
   .print-friendly {
     page-break-inside: avoid;
   }
@@ -41,8 +105,14 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Better focus states for accessibility */
+/* Better focus states */
 :focus-visible {
   outline: 2px solid #f97316;
   outline-offset: 2px;
+}
+
+/* Selection color */
+::selection {
+  background-color: #fed7aa;
+  color: #9a3412;
 }
