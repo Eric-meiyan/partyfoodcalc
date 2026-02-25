@@ -207,12 +207,7 @@ export default function Calculator({
           onClick={handleCalculate}
           className="w-full py-5 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-extrabold text-xl rounded-2xl hover:from-orange-600 hover:to-amber-600 transition-all shadow-lg hover:shadow-xl active:scale-[0.98] relative overflow-hidden group"
         >
-          <span className="relative z-10 flex items-center justify-center gap-3">
-            Calculate Food Needed
-            <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </span>
+          Calculate Food Needed 🎉
         </button>
       </div>
     </div>
