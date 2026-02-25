@@ -39,12 +39,10 @@ export function FAQ({ questions }: { questions: { q: string; a: string }[] }) {
             className="w-full text-left p-5 flex items-center justify-between gap-4"
           >
             <h3 className="text-lg font-bold text-gray-800">{item.q}</h3>
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${
-              openIndex === index ? 'bg-orange-500 text-white rotate-180' : 'bg-gray-100 text-gray-500'
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all text-sm ${
+              openIndex === index ? 'bg-orange-500 text-white' : 'bg-gray-100 text-gray-500'
             }`}>
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
+              {openIndex === index ? '−' : '+'}
             </div>
           </button>
           {openIndex === index && (

@@ -107,9 +107,7 @@ export default function ShoppingList({ items }: ShoppingListProps) {
                   : 'border-gray-300'
               }`}>
                 {checkedItems.has(index) && (
-                  <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
+                  <span className="text-white text-xs font-bold leading-none">✓</span>
                 )}
                 <input
                   type="checkbox"
