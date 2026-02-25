@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { trackCopyList, trackPrint, trackCheckItem, trackListComplete } from '@/lib/analytics';
 
 interface ShoppingItem {
   name: string;
@@ -20,12 +21,17 @@ export default function ShoppingList({ items }: ShoppingListProps) {
 
   const toggleItem = (index: number) => {
     const newChecked = new Set(checkedItems);
-    if (newChecked.has(index)) {
-      newChecked.delete(index);
-    } else {
+    const willCheck = !newChecked.has(index);
+    if (willCheck) {
       newChecked.add(index);
+    } else {
+      newChecked.delete(index);
     }
     setCheckedItems(newChecked);
+    trackCheckItem(items[index].name, willCheck, newChecked.size, items.length);
+    if (newChecked.size === items.length) {
+      trackListComplete(items.length);
+    }
   };
 
   const copyToClipboard = () => {
@@ -33,6 +39,7 @@ export default function ShoppingList({ items }: ShoppingListProps) {
       .map(item => `${item.emoji} ${item.name}: ${item.amount} ${item.unit}`)
       .join('\n');
     navigator.clipboard.writeText(text);
+    trackCopyList(items.length);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -61,7 +68,7 @@ export default function ShoppingList({ items }: ShoppingListProps) {
                 {copied ? '✓ Copied!' : '📋 Copy All'}
               </button>
               <button
-                onClick={() => window.print()}
+                onClick={() => { trackPrint('shopping_list'); window.print(); }}
                 className="px-4 py-2 bg-white/20 text-white rounded-xl text-sm font-bold hover:bg-white/30 transition-all"
               >
                 🖨️ Print

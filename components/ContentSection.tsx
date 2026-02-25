@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { trackFAQOpen, trackCalculatorNavigation } from '@/lib/analytics';
 
 interface ContentSectionProps {
   title: string;
@@ -30,7 +31,11 @@ export function FAQ({ questions }: { questions: { q: string; a: string }[] }) {
       {questions.map((item, index) => (
         <div key={index} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all hover:shadow-md">
           <button
-            onClick={() => setOpenIndex(openIndex === index ? null : index)}
+            onClick={() => { 
+              const opening = openIndex !== index;
+              setOpenIndex(opening ? index : null);
+              if (opening) trackFAQOpen(item.q, typeof window !== 'undefined' ? window.location.pathname : '/');
+            }}
             className="w-full text-left p-5 flex items-center justify-between gap-4"
           >
             <h3 className="text-lg font-bold text-gray-800">{item.q}</h3>
@@ -62,6 +67,7 @@ export function RelatedCalculators({ calculators }: { calculators: { name: strin
         <a
           key={index}
           href={calc.url}
+          onClick={() => trackCalculatorNavigation(typeof window !== 'undefined' ? window.location.pathname : '/', calc.url)}
           className="group block p-5 bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all border border-gray-100 hover:border-orange-300 text-center hover:-translate-y-1"
         >
           <div className="text-4xl mb-3 group-hover:scale-110 transition-transform inline-block">{calc.emoji}</div>

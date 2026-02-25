@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { partyTypes } from '@/lib/foodData';
+import { trackCalculate, trackPartyTypeSelect, trackGuestAdjust, trackDurationChange, trackTimeToFirstCalc } from '@/lib/analytics';
 
 interface CalculatorProps {
   onCalculate: (adults: number, kids: number, partyType: string, duration: number) => void;
@@ -18,8 +19,23 @@ export default function Calculator({
   const [kids, setKids] = useState(0);
   const [partyType, setPartyType] = useState(defaultPartyType);
   const [duration, setDuration] = useState(3);
+  const [hasCalculated, setHasCalculated] = useState(false);
+  const pageLoadTime = useRef(Date.now());
 
   const handleCalculate = () => {
+    if (!hasCalculated) {
+      const secondsToFirst = Math.round((Date.now() - pageLoadTime.current) / 1000);
+      trackTimeToFirstCalc(secondsToFirst, window.location.pathname);
+      setHasCalculated(true);
+    }
+    trackCalculate({
+      adults,
+      kids,
+      totalGuests: adults + kids,
+      partyType,
+      duration,
+      page: window.location.pathname,
+    });
     onCalculate(adults, kids, partyType, duration);
   };
 
@@ -78,7 +94,7 @@ export default function Calculator({
             {/* Quick presets */}
             <div className="flex gap-2 mt-3 justify-center">
               {[10, 20, 30, 50].map(n => (
-                <button key={n} onClick={() => setAdults(n)}
+                <button key={n} onClick={() => { setAdults(n); trackGuestAdjust('adults', n, 'preset'); }}
                   className={`px-3 py-1 text-xs font-semibold rounded-full transition-all ${adults === n ? 'bg-orange-500 text-white' : 'bg-white text-gray-500 hover:text-orange-600 border border-gray-200'}`}>
                   {n}
                 </button>
@@ -115,7 +131,7 @@ export default function Calculator({
             </div>
             <div className="flex gap-2 mt-3 justify-center">
               {[0, 5, 10, 15].map(n => (
-                <button key={n} onClick={() => setKids(n)}
+                <button key={n} onClick={() => { setKids(n); trackGuestAdjust('kids', n, 'preset'); }}
                   className={`px-3 py-1 text-xs font-semibold rounded-full transition-all ${kids === n ? 'bg-green-500 text-white' : 'bg-white text-gray-500 hover:text-green-600 border border-gray-200'}`}>
                   {n}
                 </button>
@@ -134,7 +150,7 @@ export default function Calculator({
               {partyTypes.map((pt) => (
                 <button
                   key={pt.id}
-                  onClick={() => setPartyType(pt.id)}
+                  onClick={() => { setPartyType(pt.id); trackPartyTypeSelect(pt.id); }}
                   className={`relative p-4 rounded-xl text-center transition-all border-2 ${
                     partyType === pt.id
                       ? 'border-orange-500 bg-orange-50 shadow-md scale-[1.02]'
@@ -169,7 +185,7 @@ export default function Calculator({
             min="1"
             max="8"
             value={duration}
-            onChange={(e) => setDuration(parseInt(e.target.value))}
+            onChange={(e) => { const v = parseInt(e.target.value); setDuration(v); trackDurationChange(v); }}
             className="w-full h-2 rounded-lg cursor-pointer"
           />
           <div className="flex justify-between text-xs text-gray-400 mt-2 font-medium px-1">
