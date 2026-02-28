@@ -328,7 +328,7 @@ export default function Home() {
           </div>
           <div className="border-t border-gray-800 pt-6 text-center">
             <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} PartyFoodCalc.com — Calculate the perfect party portions
+              © {new Date().getFullYear()} PartyFoodCalc.com — More from us: <a href="https://howmuchfiber.com" target="_blank" rel="noopener" className="text-gray-400 hover:text-orange-400">HowMuchFiber</a> · <a href="https://iqgame.online" target="_blank" rel="noopener" className="text-gray-400 hover:text-orange-400">IQGame</a>
             </p>
           </div>
         </div>
